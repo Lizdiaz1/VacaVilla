@@ -1,58 +1,39 @@
 'use strict';
-
-const { Model } = require('sequelize');
-
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Image extends Model {
-
-      static associate(models) {
-
-        Image.belongsTo(models.Spot, { foreignKey: 'spotId', as: 'spot' });
-      }
-    };
-    Image.init({
-        id: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          autoIncrement: true,
-          primaryKey: true,
-        },
-        spotId: {
-          type: DataTypes.INTEGER,
-          references: {
-            model: 'Spot',
-            key: 'id'
-          },
-          onUpdate: 'CASCADE',
-          onDelete: 'SET NULL'
-        },
-        type: {
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-        preview: {
-          type: DataTypes.BOOLEAN,
-          allowNull: false
-        },
-        url: {
-          type: DataTypes.STRING(512),
-          allowNull: false
-        },
-        createdAt: {
-          allowNull: false,
-          type: DataTypes.DATE,
-          defaultValue: DataTypes.NOW,
-        },
-        updatedAt: {
-          allowNull: false,
-          type: DataTypes.DATE,
-          defaultValue: DataTypes.NOW,
-        },
-      }, {
-        sequelize,
-        modelName: 'Image',
-        tableName: 'Images'
+  class Image extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      Image.belongsTo(models.Review, {
+        foreignKey: 'imageableId',
+        constraints: false
       });
-
-      return Image;
-    };
+      Image.belongsTo(models.Spot, {
+        foreignKey: 'imageableId',
+        constraints: false
+      });
+    }
+  }
+  Image.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true
+    },
+    imageableId: DataTypes.INTEGER,
+    imageableType: DataTypes.STRING,
+    url: DataTypes.STRING,
+    preview: DataTypes.BOOLEAN
+  }, {
+    sequelize,
+    modelName: 'Image',
+  });
+  return Image;
+};
