@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 
 const express = require('express');
 require('express-async-errors');
@@ -8,7 +8,7 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
-
+const bcrypt = require ('bcryptjs')
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
@@ -47,7 +47,7 @@ if (!isProduction) {
 app.use(routes); // Connect all the routes
 
 // Catch unhandled requests and forward to error handler.
-app.use((_req, _res, next) => {
+app.use((req, res, next) => {
     const err = new Error("The requested resource couldn't be found.");
     err.title = "Resource Not Found";
     err.errors = { message: "The requested resource couldn't be found." };
@@ -56,7 +56,7 @@ app.use((_req, _res, next) => {
   });
 
   // Process sequelize errors
-app.use((err, _req, _res, next) => {
+app.use((err, req, res, next) => {
     // check if error is a Sequelize error:
     if (err instanceof ValidationError) {
       let errors = {};
@@ -70,7 +70,7 @@ app.use((err, _req, _res, next) => {
   });
 
   // Error formatter
-app.use((err, _req, res, _next) => {
+app.use((err, req, res, next) => {
     res.status(err.status || 500);
     console.error(err);
     res.json({

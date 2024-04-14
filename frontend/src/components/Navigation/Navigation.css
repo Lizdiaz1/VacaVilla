@@ -1,0 +1,62 @@
+.hidden {
+    display: none;
+}
+.logo{
+    text-decoration: none;
+    color:#FF5A5F;
+    font-size: 30px;
+
+}
+nav{
+    display: flex;
+    border-bottom: solid grey;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+
+}
+
+.pointer{
+    cursor:pointer;
+}
+
+.profile-dropdown > li{
+    list-style-type: none;
+}
+.buttons-container{
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+.create-spot{
+margin-right: 10px;
+}
+.profileBtnEle{
+    width: 200px;
+    height:200px
+}
+
+
+/* new */
+
+.profile-dropdown.hidden {
+    display: none;
+  }
+
+  .profile-dropdown {
+    position: absolute;
+    background-color: white;
+    list-style: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: none;
+  }
+
+  .profile-dropdown li {
+    margin-bottom: 8px;
+  }
+
+  .profile-button:hover .profile-dropdown {
+    display: block;
+  }
