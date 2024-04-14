@@ -30,5 +30,10 @@
     "redux-logger": "^3.0.6",
     "vite": "^4.4.5",
     "vite-plugin-eslint": "^1.8.1"
-  }
+  },
+  "description": "This repo contains a basic Vite React template configured for use in App Academy projects.",
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
